@@ -1,0 +1,18 @@
+name: Build No-Vsync
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        target: [Android32, Android64, iOS]
+    runs-on: ${{ matrix.target == 'iOS' && 'macos-latest' || 'ubuntu-latest' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: geode-sdk/build-geode-mod@main
+        with:
+          target: ${{ matrix.target }}
+          sdk: latest
