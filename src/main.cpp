@@ -2,6 +2,12 @@
 
 using namespace geode::prelude;
 
+#if defined(__APPLE__)
+extern "C" void NoVsync_iOS();
+#endif
+
 $execute {
-    // VSync hook implementation will be added here per platform.
+#if defined(__APPLE__)
+    NoVsync_iOS();
+#endif
 }
